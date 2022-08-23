@@ -1,7 +1,12 @@
+using AddressBookApp.Data;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddDbContext<AddressBookAppDbContext>(options =>
+options.UseSqlServer(builder.Configuration.GetConnectionString("AddressBookAppConnectionString")));
 
 var app = builder.Build();
 
