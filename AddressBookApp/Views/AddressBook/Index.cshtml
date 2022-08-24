@@ -1,0 +1,40 @@
+﻿@model List<AddressBookApp.Models.Domain.Address>
+
+@{
+}
+
+<h1>All Addresses</h1>
+
+
+<table class="table">
+  <thead class="table-dark">
+    <tr>
+      @*<th scope="col">Id</th>*@
+      <th >First Name</th>
+      <th >Last Name</th>
+      <th >Address</th>
+      <th >Phone Number</th>
+      <th >Birthday</th>
+    </tr>
+  </thead>
+
+  <tbody>
+
+      @foreach(var address in Model)
+        {
+     <tr>
+      
+  @*    <td>@address.Id</td>*@
+      <td>@address.FirstName</td>
+      <td>@address.LastName</td>
+      <td>@address.HomeAddress</td>
+      <td>@address.PhoneNumber</td>
+      <td>@address.Birthday.ToString("dd.MM.yy")</td>
+    </tr>
+        }
+
+
+  </tbody>
+  </table>
+
+

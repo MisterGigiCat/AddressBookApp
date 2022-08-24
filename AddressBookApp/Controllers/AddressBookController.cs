@@ -2,6 +2,7 @@
 using AddressBookApp.Models;
 using AddressBookApp.Models.Domain;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace AddressBookApp.Controllers
 {
@@ -37,6 +38,14 @@ namespace AddressBookApp.Controllers
             await addressBookDbContext.Addresses.AddAsync(address);
             await addressBookDbContext.SaveChangesAsync();
             return RedirectToAction("Add");
-        } 
+        }
+
+        [HttpGet]
+
+        public async Task<IActionResult> Index()
+        {
+            var addresses = await addressBookDbContext.Addresses.ToListAsync();
+            return View(addresses);
+        }
     }
 }
