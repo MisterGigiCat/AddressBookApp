@@ -1,6 +1,6 @@
 ﻿namespace AddressBookApp.Models
 {
-    public class AddAddressViewModel
+    public class EditAddressViewModel
     {
         public Guid Id { get; set; }
         public string FirstName { get; set; }

@@ -47,5 +47,53 @@ namespace AddressBookApp.Controllers
             var addresses = await addressBookDbContext.Addresses.ToListAsync();
             return View(addresses);
         }
+
+        [HttpGet]
+
+        public async Task<IActionResult> View(Guid id)
+        {
+            var address = await addressBookDbContext.Addresses.FirstOrDefaultAsync(x => x.Id == id);
+
+            if(address != null)
+            {
+                var viewModel = new EditAddressViewModel()
+                {
+                    Id= address.Id,
+                    FirstName = address.FirstName,
+                    LastName= address.LastName,
+                    HomeAddress= address.HomeAddress,   
+                    PhoneNumber= address.PhoneNumber,   
+                    Birthday= address.Birthday
+                };
+                return await Task.Run(()=> View("View",viewModel)) ;
+            }
+            return RedirectToAction("Index");
+        }
+
+
+
+
+        [HttpPost]
+
+        public async Task<IActionResult> View(EditAddressViewModel model)
+        {
+            var address = await addressBookDbContext.Addresses.FindAsync(model.Id);
+
+            if (address != null)
+            {
+                address.FirstName = model.FirstName;
+                address.LastName = model.LastName;
+                address.HomeAddress = model.HomeAddress;
+                address.PhoneNumber = model.PhoneNumber;
+                address.Birthday = model.Birthday;
+
+                await addressBookDbContext.SaveChangesAsync();
+
+                return RedirectToAction("Index");
+            }
+            return RedirectToAction("Index");
+
+        }
     }
+    
 }

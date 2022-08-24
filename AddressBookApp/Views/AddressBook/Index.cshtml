@@ -15,6 +15,8 @@
       <th >Address</th>
       <th >Phone Number</th>
       <th >Birthday</th>
+      <th></th>
+    
     </tr>
   </thead>
 
@@ -30,6 +32,8 @@
       <td>@address.HomeAddress</td>
       <td>@address.PhoneNumber</td>
       <td>@address.Birthday.ToString("dd.MM.yy")</td>
+      <td> <a href="AddressBook/View/@address.Id">View</a> </td>
+       
     </tr>
         }
 
