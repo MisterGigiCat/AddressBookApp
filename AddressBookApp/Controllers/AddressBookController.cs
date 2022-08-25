@@ -37,7 +37,7 @@ namespace AddressBookApp.Controllers
              };
             await addressBookDbContext.Addresses.AddAsync(address);
             await addressBookDbContext.SaveChangesAsync();
-            return RedirectToAction("Add");
+            return RedirectToAction("Index");
         }
 
         [HttpGet]
@@ -94,6 +94,22 @@ namespace AddressBookApp.Controllers
             return RedirectToAction("Index");
 
         }
+        [HttpPost]
+
+        public async Task<IActionResult> Delete(EditAddressViewModel model)
+        {
+            var address = await addressBookDbContext.Addresses.FindAsync(model.Id);
+
+            if(address != null)
+            {
+                addressBookDbContext.Addresses.Remove(address);
+                await addressBookDbContext.SaveChangesAsync();
+
+                return RedirectToAction("Index");
+            }
+            return RedirectToAction("Index");
+        }
+
     }
     
 }
